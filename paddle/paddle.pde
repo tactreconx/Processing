@@ -15,6 +15,8 @@ int lpadx=55;
 int lpady=200;
 int lpadlength=30;
 int lpadwidth=100;
+int p1score=0;
+int p2score=0;
 
 void setup() {
   size(900, 500);
@@ -30,15 +32,33 @@ void draw() {
 
   if (ballX  > rightBoard+leftBoard ) {
     ballSpeedX=-ballSpeedX;
+     p2score=p2score+1;
   }
   if (ballX > rpadx && ballY>rpady && ballY< rpady+ rpadwidth) {
     ballSpeedX=-ballSpeedX;
-    
   }
-  
-  if (ballX<leftBoard) {
+    if(ballX<= lpadx+lpadlength && ballY>= lpady && ballY<= lpady+lpadwidth){
     ballSpeedX=-ballSpeedX;
-  }
+    println(lpadwidth);
+   }
+   if(keyPressed && key=='q'){
+//     lpady=lpady-4;
+     lpady -= 2;
+   }
+   if(keyPressed && key=='a'){
+     lpady+=2;
+   }
+   if(keyPressed && key=='9'){
+     rpady-=2;
+   }
+   if(keyPressed&&key=='6'){
+     rpady+=2;
+   }
+
+  if (ballX<leftBoard) {
+   ballSpeedX=-ballSpeedX;
+    p1score=p1score+1;
+ }
   if (ballY> bottomBoard+topBoard) {
     ballspeedY=-ballspeedY;
   }
@@ -49,6 +69,9 @@ void draw() {
   ballX=ballX+ballSpeedX;
   ballY=ballY+ballspeedY;
   println("X: " + mouseX + " Y: " + mouseY);
+ textSize(32);
+ text("player 1 score="+p1score,10,30);
+ text("player 2 score="+p2score,600,20);
   fill(0, 216, 255);
   rect(rpadx, rpady, rpadlength, rpadwidth);
 
